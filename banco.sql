@@ -1,3 +1,5 @@
+USE --name of schema--;
+
 CREATE TABLE Clientes (
     cliente_id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
@@ -13,7 +15,7 @@ CREATE TABLE Contas (
     conta_id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
     numero_conta VARCHAR(20) UNIQUE,
-    tipo_conta ENUM('Corrente', 'Poupança'),
+    tipo_conta ENUM('Corrente', 'PoupanÃ§a'),
     saldo DECIMAL(15, 2) DEFAULT 0,
     data_abertura DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cliente_id) REFERENCES Clientes(cliente_id) ON DELETE CASCADE
@@ -22,7 +24,7 @@ CREATE TABLE Contas (
 CREATE TABLE Transacoes (
     transacao_id INT AUTO_INCREMENT PRIMARY KEY,
     conta_id INT,
-    tipo_transacao ENUM('Depósito', 'Saque', 'Transferência'),
+    tipo_transacao ENUM('DepÃ³sito', 'Saque', 'TransferÃªncia'),
     valor DECIMAL(15, 2),
     data_transacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     descricao VARCHAR(255),
@@ -60,7 +62,7 @@ CREATE TABLE Transferencias (
 
 -- Clientes
 INSERT INTO Clientes (nome, sobrenome, data_nascimento, cpf, telefone, email) VALUES 
-('João', 'Silva', '1985-05-15', '12345678901', '11987654321', 'joao.silva@email.com'),
+('JoÃ£o', 'Silva', '1985-05-15', '12345678901', '11987654321', 'joao.silva@email.com'),
 ('Maria', 'Souza', '1990-07-20', '10987654321', '11912345678', 'maria.souza@email.com'),
 ('Pedro', 'Almeida', '1982-03-25', '23456789012', '11998765432', 'pedro.almeida@email.com'),
 ('Ana', 'Costa', '1995-08-30', '34567890123', '11987654322', 'ana.costa@email.com'),
@@ -69,31 +71,31 @@ INSERT INTO Clientes (nome, sobrenome, data_nascimento, cpf, telefone, email) VA
 -- Contas 
 INSERT INTO Contas (cliente_id, numero_conta, tipo_conta) VALUES
 (1, '0001-1', 'Corrente'),
-(2, '0002-2', 'Poupança'),
+(2, '0002-2', 'PoupanÃ§a'),
 (3, '0003-3', 'Corrente'),
-(4, '0004-4', 'Poupança'),
+(4, '0004-4', 'PoupanÃ§a'),
 (5, '0005-5', 'Corrente');
 
--- Transações
+-- TransaÃ§Ãµes
 INSERT INTO Transacoes (conta_id, tipo_transacao, valor, descricao) VALUES 
-(1, 'Depósito', 500.00, 'Depósito inicial'),
-(1, 'Saque', 200.00, 'Saque automático'),
-(2, 'Transferência', 300.00, 'Transferência para conta 1'),
-(3, 'Depósito', 700.00, 'Depósito mensal'),
+(1, 'DepÃ³sito', 500.00, 'DepÃ³sito inicial'),
+(1, 'Saque', 200.00, 'Saque automÃ¡tico'),
+(2, 'TransferÃªncia', 300.00, 'TransferÃªncia para conta 1'),
+(3, 'DepÃ³sito', 700.00, 'DepÃ³sito mensal'),
 (4, 'Saque', 150.00, 'Saque para compras'),
-(5, 'Transferência', 100.00, 'Transferência para conta 6');
+(5, 'TransferÃªncia', 100.00, 'TransferÃªncia para conta 6');
 
--- Funcionários
+-- FuncionÃ¡rios
 INSERT INTO Funcionarios (nome, sobrenome, cargo, data_admissao, salario, cpf) VALUES 
 ('Carlos', 'Pereira', 'Gerente', '2020-01-10', 5000.00, '12345678902'),
 ('Ana', 'Oliveira', 'Caixa', '2021-06-15', 3000.00, '10987654322');
 
--- Agências
+-- AgÃªncias
 INSERT INTO Agencias (nome, endereco, telefone, gerente_id) VALUES 
-('Agência Centro', 'Rua A, 123', '1122334455', 1),
-('Agência Sul', 'Avenida B, 456', '1133445566', 2);
+('AgÃªncia Centro', 'Rua A, 123', '1122334455', 1),
+('AgÃªncia Sul', 'Avenida B, 456', '1133445566', 2);
 
--- Transferências 
+-- TransferÃªncias 
 INSERT INTO Transferencias (conta_origem_id, conta_destino_id, valor) VALUES 
 (1, 2, 100.00),
 (2, 3, 200.00);
